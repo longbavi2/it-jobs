@@ -1,0 +1,65 @@
+.layout {
+    &__header {
+        display: flex;
+        background-color: white;
+        position: sticky;
+        border-bottom: 1px solid #ddd;
+        z-index: 999;
+        padding: 10px;
+        top: 0;
+    }
+
+    &__logo {
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s;
+        color: var(--color-main);
+        font-size: 25px;
+        font-weight: 800;
+    }
+
+    &__nav {
+        padding: 0 20px;
+        &--close {
+            width: 80px
+        }
+    }
+
+    &__link {
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+
+        &--log {
+            margin-right: 20px;
+        }
+    }
+
+    &__icon--oc {
+        font-size: 20px;
+    }
+
+    &__content {
+        padding: 20px;
+        transition: all 0.5s;
+        margin-left: 200px;
+
+        &--full {
+            margin-left: 80px;
+        }
+    }
+
+    &__close {
+        width: 80px;
+        transition: all 0.5s;
+        font-size: 15px;
+    }
+
+    &__sider {
+        height: calc(100vh - 70px);
+        position: fixed !important;
+        left: 0;
+    }
+}
