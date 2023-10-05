@@ -13,9 +13,10 @@ function SearchForm() {
         }
         dataCity();
     }, [])
-    const onFinish = (value) => {
-        const city = value.city || "";
-        const keyword = value.keyword || "";
+    const onFinish = (values) => {
+        const city = values.city || "";
+        const keyword = values.keyword || "";
+        console.log(values)
         if (city.length > 0 || keyword.length > 0) {
             navigate(
                 `/search?city=${city}&&keyword=${keyword}`

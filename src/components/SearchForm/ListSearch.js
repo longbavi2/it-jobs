@@ -12,7 +12,7 @@ function ListSearch(props) {
             const NewArray = [];
             if (data.length > 0) {
                 data.forEach(element => {
-                    const findCompany = dataCompany.find(item => item.id == element.idCompany);
+                    const findCompany = dataCompany.find(item => item._id === element.idCompany);
                     const option = {
                         nameCompany: findCompany.companyName,
                         ...element,
@@ -25,14 +25,13 @@ function ListSearch(props) {
         }
         getCompany();
     }, [data])
-    console.log(company)
     return (
         <>
             {company && (
                 <>
                     {company.map(item => (
-                        <Link key={item.id} to={`/company/${item.idCompany}`}>
-                            <Card key={item.id}>
+                        <Link key={item._id} to={`/company/${item.idCompany}`}>
+                            <Card key={item._id}>
                                 <div>
                                     <p><strong> Tên công ty : </strong> {item.nameCompany}</p>
                                 </div>

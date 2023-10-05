@@ -7,57 +7,53 @@ import JobItem from "../../components/JobItem";
 
 function CompanyDetail() {
     const { id } = useParams();
-    const [infoCompany, setInfoCompany] = useState([])
+    const [infoCompany, setInfoCompany] = useState({})
     const [jobs, setJobs] = useState([])
     useEffect(() => {
         const CompanyById = async () => {
             const dataCompanyById = await GetCompanyById(id);
-            setInfoCompany(dataCompanyById)
+            const dataJobById = await GetJobById(id);
+            setJobs(dataJobById)
+            setInfoCompany(...dataCompanyById)
         }
         CompanyById();
     }, [])
-    useEffect(() => {
-        const JobById = async () => {
-            const dataJobById = await GetJobById(id);
-            setJobs(dataJobById)
-        }
-        JobById();
-    }, [])
+
     return (
         <>
             <GoBack />
 
-            {infoCompany.length > 0 ? (<>
-                <h1>{infoCompany[0].companyName}</h1>
+            {infoCompany && (<>
+                <h1>{infoCompany.companyName}</h1>
 
                 <div className="mb-20">
-                    Địa chỉ: <strong>{infoCompany[0].address}</strong>
+                    Địa chỉ: <strong>{infoCompany.address}</strong>
                 </div>
 
                 <div className="mb-20">
-                    Số lượng nhân sự: <strong>{infoCompany[0].quantityPeople}</strong>
+                    Số lượng nhân sự: <strong>{infoCompany.quantityPeople}</strong>
                 </div>
 
                 <div className="mb-20">
-                    Thời gian làm việc: <strong>{infoCompany[0].workingTime}</strong>
+                    Thời gian làm việc: <strong>{infoCompany.workingTime}</strong>
                 </div>
 
                 <div className="mb-20">
-                    Link website: <strong>{infoCompany[0].website}</strong>
+                    Link website: <strong>{infoCompany.website}</strong>
                 </div>
 
                 <div className="mb-10">Mô tả ngắn:</div>
-                <div className="mb-20">{infoCompany[0].description}</div>
+                <div className="mb-20">{infoCompany.description}</div>
 
                 <div className="mb-10">Mô tả chi tiết:</div>
-                <div className="mb-20">{infoCompany[0].detail}</div>
+                <div className="mb-20">{infoCompany.detail}</div>
 
                 <div className="mb-10">Danh sách các job:</div>
                 <div className="mb-20">
                     <Row gutter={[20, 20]}>
                         {jobs.length > 0 ? (<>
                             {jobs.map(item => (
-                                <Col span={8} key={item.id}>
+                                <Col span={8} key={item._id}>
                                     <JobItem item={item} />
                                 </Col>
                             ))}
@@ -65,8 +61,7 @@ function CompanyDetail() {
                     </Row>
                 </div>
             </>
-
-            ) : (<></>)
+            )
             }
         </>
     )

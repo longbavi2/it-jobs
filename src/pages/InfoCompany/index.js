@@ -13,6 +13,7 @@ function InCompany() {
     const [isEdit, setIsEdit] = useState(false);
     const [data, setData] = useState();
     const [form] = Form.useForm();
+    const [load, setLoad] = useState(1)
     useEffect(() => {
         const getDataCompany = async () => {
             const data = await GetCompanyById(id);
@@ -20,12 +21,17 @@ function InCompany() {
         }
         getDataCompany();
     }, [])
-    const onFinish = async(value) => {
-        const respon = await updateCompany(id,value)
-        if(respon){
+    const onFinish = async (value) => {
+        const options = {
+            id: id,
+            ...value
+        }
+        const respon = await updateCompany(options)
+        if (respon) {
             form.resetFields();
             setIsEdit(false);
             messageApi.success("Bạn đã cập nhật thành công");
+            setLoad(load => load + 1)
         }
     }
     const handleEdit = () => {
@@ -36,7 +42,7 @@ function InCompany() {
     }
     return (
         <>
-        {contextHolder}
+            {contextHolder}
             {data && (<Card title="Thông tin công ty" extra={isEdit ? (<Button onClick={handleCancel}>Hủy</Button>)
                 :
                 (<Button onClick={handleEdit}>Chỉnh sửa</Button>)} >
@@ -48,7 +54,7 @@ function InCompany() {
                 >
                     <Row gutter={[20, 20]}>
                         <Col span={24}>
-                            <Form.Item  name="companyName" label="Tên công ty" rules={rules}>
+                            <Form.Item name="companyName" label="Tên công ty" rules={rules}>
                                 <Input />
                             </Form.Item>
                         </Col>
@@ -92,10 +98,10 @@ function InCompany() {
                                 <TextArea rows={16} />
                             </Form.Item>
                         </Col>
-                        {isEdit ? (<Button htmlType="submit" type="primary">Cập nhật</Button>):(<Button>Hủy</Button>)}
-                </Row>
-            </Form>
-        </Card >)}
+                        {isEdit ? (<Button htmlType="submit" type="primary">Cập nhật</Button>) : (<Button>Hủy</Button>)}
+                    </Row>
+                </Form>
+            </Card >)}
         </>
     )
 }

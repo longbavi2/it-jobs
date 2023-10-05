@@ -18,8 +18,8 @@ function ListCompany() {
             <h2>Danh sách một số công ty</h2>
             <Row gutter={[20, 20]}>
                 {data.map((item) => (
-                    <Col span={8} key={item.id}>
-                        <Link to={`/company/${item.id}`}>
+                    <Col span={8} key={item._id}>
+                        <Link to={`/company/${item._id}`}>
                             <Card>
                                 <div className="mb-10">
                                     Công ty: <strong>{item.companyName}</strong>

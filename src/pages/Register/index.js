@@ -8,17 +8,13 @@ function Register() {
     const [messageApi, contextHolder] = message.useMessage();
     const onFinish = async (value) => {
         const checkEmail = await RegisterEmail(value.email)
-        const checkPhone = await RegisterPhone(value.phone)
         if (checkEmail.length > 0) {
             messageApi.error("Đã tồn tại Email")
-        }
-        else if (checkPhone.length > 0) {
-            messageApi.error("Đã tồn tại số điện thoại")
         }
         else {
             const admin = await createAdmin(value);
             if (admin) {
-                messageApi.success("Bạn đã đăng kí thành công");
+                alert("Bạn đã đăng kí thành công")
                 navigate("/login")
             }
         }

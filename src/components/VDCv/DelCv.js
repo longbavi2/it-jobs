@@ -7,8 +7,9 @@ import { delCv } from "../../services/CvService";
 function DelCv(props) {
     const { item, handleReload } = props;
     const [mess, contextHolder] = message.useMessage();
+    let id = item._id
     const handleClick = async () => {
-        const respon = await delCv(item.id);
+        const respon = await delCv({ id });
         if (respon) {
             handleReload();
             mess.open({

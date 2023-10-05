@@ -56,11 +56,11 @@ function JobManage() {
     },
     {
       title: 'Thời gian',
-      key: 'updateAt',
-      dataIndex: 'updateAt',
+      key: 'updatedAt',
+      dataIndex: 'updateAtd',
       render: (_, item) => (
-        <><p>Ngày tạo : {item.createAt}</p>
-          <p>Cập nhật : {item.updateAt}</p></>
+        <><p>Ngày tạo : {item.createdAt}</p>
+          <p>Cập nhật : {item.updatedAt}</p></>
       ),
     },
     {
@@ -69,7 +69,7 @@ function JobManage() {
       dataIndex: 'status',
       render: (_, item) => {
         return (
-          <Tag color={item.status ? "green" : "red"} key={item.id}>
+          <Tag color={item.status ? "green" : "red"} key={item}>
             {item.status ? (<>Đang bật</>) : (<>Đang tắt</>)}
           </Tag>
         )
@@ -80,7 +80,7 @@ function JobManage() {
       render: (_, item) => (
         <>
           <Tooltip title="">
-            <Link to={`/viewjob/${item.id}`} >
+            <Link to={`/viewjob/${item._id}`} >
               <EyeJob icon={<EyeOutlined />} />
             </Link>
           </Tooltip>
@@ -95,7 +95,7 @@ function JobManage() {
       <Link to={`/create-job`}>
         <Button className="mb-10" icon={<PlusOutlined />}>Thêm Job</Button>
       </Link>
-      <Table rowKey="id" columns={columns} dataSource={data} />
+      <Table rowKey="_id" columns={columns} dataSource={data} />
     </>
   )
 }

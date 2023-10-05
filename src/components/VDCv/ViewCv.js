@@ -11,18 +11,22 @@ function ViewCv() {
     useEffect(() => {
         const getDataCv = async () => {
             const dataCv = await getCvByIdTrue(id);
-            const dataJob = await ListJob();
+            const dataJob = await ListJob()
+
             const dataCvNew = {
                 ...dataCv[0],
                 statusRead: true
             }
+            delete dataCvNew._id
             const respon = await pathCv(id, dataCvNew);
-            const nameJob = dataJob.find(item => item.id === dataCv[0].idJob)
-            const option = {
-                ...dataCvNew[0],
-                nameJob: nameJob.name
+            if (respon) {
+                const nameJob = dataJob.find(item => item._id === dataCv[0].idJob)
+                const options = {
+                    ...dataCvNew,
+                    nameJob: nameJob.name
+                }
+                setData(options);
             }
-            setData(option);
         }
         getDataCv();
     }, [])

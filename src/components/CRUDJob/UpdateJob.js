@@ -1,7 +1,8 @@
-import { patch } from "../../utils/request"
+import { patch, put } from "../../utils/request"
 
-export const updateJob = async(id,options)=>{
-    const path = `jobs/${id}`;
-    const respon = await patch(path,options);
+export const updateJob = async (id, options) => {
+    options.id = id
+    const path = `jobs`;
+    const respon = await put(path, options);
     return respon;
 }

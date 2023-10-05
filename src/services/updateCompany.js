@@ -1,8 +1,7 @@
-import { patch } from "../utils/request"
+import { patch, put } from "../utils/request"
 
-export const updateCompany=async(id,option)=>{
-    const path =`company/${id}`;
-    const respon = await patch(path,option);
+export const updateCompany = async (options) => {
+    const path = `companys`;
+    const respon = await put(path, options);
     return respon;
 }
-// get thi se la ? con path put hay del thi / 

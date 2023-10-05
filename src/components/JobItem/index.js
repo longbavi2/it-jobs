@@ -6,7 +6,7 @@ function JobItem(props) {
     return (
         <>
             <Card
-                title={<Link to={`/job/${item.id}`}>{item.name}</Link>}
+                title={<Link to={`/job/${item._id}`}>{item.name}</Link>}
                 size="small"
             >
                 <div className="mb-10">
@@ -19,7 +19,7 @@ function JobItem(props) {
                 </div>
                 <div className="mb-10">
                     <span>Thành phố: </span>
-                    {item.city = item.city ? (<>{item.city.map((item, index) => (
+                    {item.city = item.city ? (<>{item.city || [].map((item, index) => (
                         <Tag color="orange" className="mb-5" key={index}>
                             {item}
                         </Tag>
@@ -29,7 +29,7 @@ function JobItem(props) {
                     Lương: <strong>{item.salary}$</strong>
                 </div>
                 <div className="mb-10">
-                    Ngày tạo: <strong>{item.createAt}</strong>
+                    Ngày tạo: <strong>{item.createdAt}</strong>
                 </div>
             </Card>
         </>

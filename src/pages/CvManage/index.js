@@ -17,7 +17,7 @@ function CvManage() {
         const dataJob = await getJob(idCompany);
         for (let i = 0; i < dataCv.length; i++) {
             let nameJob = dataJob.find(item => {
-                return dataCv[i].idJob === item.id
+                return dataCv[i].idJob === item._id
             })
             const option = {
                 ...dataCv[i],
@@ -80,7 +80,7 @@ function CvManage() {
             render: (_, item) => (
                 <>
                     <Tag color={item.statusRead ? "blue" : "black"}>
-                        {item.statusRead ? (<>Đang bật</>) : (<>Đang tắt</>)}
+                        {item.statusRead ? (<>Đã xem</>) : (<>Chưa xem</>)}
                     </Tag>
                 </>
             ),
@@ -90,7 +90,7 @@ function CvManage() {
             render: (_, item) => (
                 <>
                     <Tooltip title="">
-                        <Link to={`/viewcv/${item.id}`} >
+                        <Link to={`/viewcv/${item._id}`} >
                             <EyeJob icon={<EyeOutlined />} />
                         </Link>
                     </Tooltip>
@@ -104,7 +104,7 @@ function CvManage() {
             <h4>
                 Danh sách CV
             </h4>
-            <Table rowKey="id" columns={columns} dataSource={data} />
+            <Table rowKey="_id" columns={columns} dataSource={data} />
         </>
     )
 }

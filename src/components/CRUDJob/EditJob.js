@@ -31,23 +31,16 @@ function EditJob(props) {
             if (response) {
                 setTags(response);
             }
-        };
-        fetchApi();
-    }, []);
-
-    useEffect(() => {
-        const fetchApi = async () => {
-            const response = await getAllCity();
-            if (response) {
+            const response1 = await getAllCity();
+            if (response1) {
                 setCity(response);
             }
         };
         fetchApi();
     }, []);
-
     const handleFinish = async (values) => {
-        values.updateAt = getTimeCurrent();
-        const response = await updateJob(item.id, values);
+        // console.log(item._id, values)
+        const response = await updateJob(item._id, values);
         if (response) {
             setIsModalOpen(false);
             handleReload();
